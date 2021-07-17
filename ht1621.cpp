@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-#include "HT1621.h"
+#include "ht1621.h"
 
 #define ADDR_MAX 128
 
