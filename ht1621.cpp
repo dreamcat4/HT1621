@@ -45,7 +45,6 @@ bool HT1621::begin()
 
 void HT1621::writeBits(uint8_t data, uint8_t cnt)
 {
-    uint8_t bitmask;
     while (cnt) {
         digitalWrite(wr_pin, LOW);
         uint8_t bitval = (data & (1 << (cnt - 1))) ? HIGH : LOW;
