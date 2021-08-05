@@ -4,15 +4,19 @@
 
 #define ADDR_MAX 128
 
+
+// #define HT_PINMODE_OUT OUTPUT         // for active high, voltage must be the same on both sides
+#define HT_PINMODE_OUT OUTPUT_OPEN_DRAIN // for interfacing mixed logic levels, if pin is active low
+
 #define TAKE_CS()    digitalWrite(cs_pin, LOW)
 #define RELEASE_CS() digitalWrite(cs_pin, HIGH)
 
 inline void HT1621::initControlBus()
 {
-    pinMode(data_pin, OUTPUT);
-    pinMode(wr_pin, OUTPUT);
-    pinMode(rd_pin, OUTPUT);
-    pinMode(cs_pin, OUTPUT);
+    pinMode(data_pin, HT_PINMODE_OUT);
+    pinMode(wr_pin, HT_PINMODE_OUT);
+    pinMode(rd_pin, HT_PINMODE_OUT);
+    pinMode(cs_pin, HT_PINMODE_OUT);
 
     digitalWrite(cs_pin, HIGH);
     digitalWrite(wr_pin, HIGH);
@@ -64,7 +68,7 @@ uint8_t HT1621::readBits(uint8_t cnt)
         digitalWrite(rd_pin, HIGH);
         cnt--;
     }
-    pinMode(data_pin, OUTPUT);
+    pinMode(data_pin, HT_PINMODE_OUT);
     return data;
 }
 
